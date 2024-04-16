@@ -1,1 +1,13 @@
 # Card-Counting-Coach
+
+## Overview
+Blackjack is an incredibly popular and well known casino banking game. As such, a strategy known as “card counting” has been formulated and is used by players to guide bet sizes and gain favorable odds against the house over a long period of time. The strategy is simple on paper, where each card played is assigned a weight, positive or negative, that adds up to the current “count.” Generally, face cards and aces have a negative value, low numbers have a positive value, and high numbers are neutral. The player then sizes larger bets when the count is high and lowers bet sizes when the count is low. 
+
+## Major Features
+The program will boast an interactive graphical user interface that allows the user to select the number of players playing in a round, the starting stack size, shoe size (number of decks shuffled at once), and card counting system (different systems assign differing weights to each card). There is also an option to start the game with the given selection. Once in a game, an option to show the current count is displayed in a corner, and as the player goes through hands, they are expected to periodically check their mental count with the actual running count. There could possibly be a quiz option that asks the player to correctly state the count. 
+
+## Assumptions and Dependencies 
+Naturally, the primary research topic would be into different card counting strategies and common blackjack rulesets that casinos use. From there, further research into how to properly size bets could be incorporated into the program as well. On the technical side, the GUI would have to be built using either TKinter or Pygame; at the present moment I am unsure which choice would be better suited for this project. Some other intricacies would be writing my own card deck library to properly simulate an actual card deck, which also requires a way to implement a proper random shuffle. 
+
+## Scope of Program
+By the end of the semester I expect to have a functional Blackjack game and running card count tracker along with the various game tuning options described in Major Features. From there comes improvements on the graphical side of the project, such as fancy card dealing and flipping animations as well as an intuitive user interface. An option for running an automated card counting / betting simulation to test and calculate the edge any specific count gives the player could be an interesting add-on. Overall this project seems doable to be finished within five weeks, with most of the complexity coming from making the “polish” of a final product.
