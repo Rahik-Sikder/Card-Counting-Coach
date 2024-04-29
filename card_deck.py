@@ -2,16 +2,48 @@ import math
 import random
 from typing import List
 
+rank_map = {
+    'A': '01',
+    '2': '02',
+    '3': '03',
+    '4': '04',
+    '5': '05',
+    '6': '06',
+    '7': '07',
+    '8': '08',
+    '9': '09',
+    '10': '10',
+    'J': 'C1J',
+    'Q': 'C2Q',
+    'K': 'C3K',
+    '\u2660' : 'S', 
+    '\u2665' : 'D', 
+    '\u2663' : 'C', 
+    '\u2666': 'H'
+}
+
 class Card:
     
-    def __init__(self, face, suit, value) -> None:
+    def __init__(self, rank, suit, value, is_visible=True) -> None:
         self.is_visible = False
-        self.face = face # Not really needed but want to store
+        self.rank = rank
         self.suit = suit
         self.value = value
+        self.png = ''
+        self.__set_visible()
+        
+    def __set_visible(self):
+        if not self.is_visible:
+            self.png = './card_jpgs/card_back.jpeg'
+        else:
+            self.png = f'./card_jpgs/{rank_map[self.suit]}{rank_map[self.rank]}.jpg'
     
     def flip(self):
         self.is_visible = not self.is_visible
+        self.__set_visible()
+    
+    def __str__(self) -> str:
+        return self.rank + self.suit
 
 
 class CardDeck:
@@ -24,22 +56,22 @@ class CardDeck:
         # A through K of Spades
         i = 1
         for type in card_types:
-            self.deck.append(Card(type + card_suits[0], card_suits[0], min(i, 10)))
+            self.deck.append(Card(type, card_suits[0], min(i, 10)))
             i += 1
         # A through K of Diamonds
         i = 1
         for type in card_types:
-            self.deck.append(Card(type + card_suits[1], card_suits[1], min(i, 10)))
+            self.deck.append(Card(type, card_suits[1], min(i, 10)))
             i += 1
         # K through A of Clubs
         i = len(card_types)
         for type in reversed(card_types):
-            self.deck.append(Card(type + card_suits[2], card_suits[2], min(i, 10)))
+            self.deck.append(Card(type, card_suits[2], min(i, 10)))
             i -= 1
         #  K through A of Hearts
         i = len(card_types)
         for type in reversed(card_types):
-            self.deck.append(Card(type + card_suits[3], card_suits[3], min(i, 10)))
+            self.deck.append(Card(type, card_suits[3], min(i, 10)))
             i -= 1
     
     def take_card(self):
@@ -48,7 +80,7 @@ class CardDeck:
     def print_deck(self):
         # Print out the deck of cards
         for card in self.deck:
-            print(card.face, end=' ')
+            print(card, end=' ')
         print()
 
     def shuffle_deck(self):
@@ -72,7 +104,7 @@ class Shoe:
     def print_shoe(self):
         # Print out the deck of cards
         for card in self.cards:
-            print(card.face, end=' ')
+            print(card, end=' ')
         print()
 
     def reset_shoe(self, shoe_size) -> None:

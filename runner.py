@@ -6,11 +6,12 @@ import sys
 import pygame
 from pygame.locals import *
 # Import additional modules here.
-
+from card_deck import *
+from game_engine import *
 
 # Feel free to edit these constants to suit your requirements.
 FRAME_RATE = 60.0
-SCREEN_SIZE = (640, 480)
+SCREEN_SIZE = (1600, 900)
 
 
 def pygame_modules_have_loaded():
@@ -31,7 +32,7 @@ pygame.font.init()
 
 if pygame_modules_have_loaded():
     game_screen = pygame.display.set_mode(SCREEN_SIZE)
-    pygame.display.set_caption('Test')
+    pygame.display.set_caption('Card Counting Coach')
     clock = pygame.time.Clock()
 
     def declare_globals():
@@ -40,6 +41,11 @@ if pygame_modules_have_loaded():
         # Yes, globals are evil, but for a confined test script they will make
         # everything much easier. This way, you can access the class(es) from
         # all three of the methods provided below.
+        global deck 
+        deck = CardDeck()
+        global blackjack
+        blackjack = BlackJack(game_screen, num_bots=3)
+        blackjack.new_round_start()
         pass
 
     def prepare_test():
@@ -52,6 +58,19 @@ if pygame_modules_have_loaded():
         pass
 
     def update(screen, time):
+        game_screen.fill((79,91,102))
+
+        # Draw title
+        title_font = pygame.font.Font(None, 85)
+        subtitle_font = pygame.font.Font(None, 35)
+        title = title_font.render("Card Counting Coach", True, (255, 255, 255))
+        subtitle = subtitle_font.render("Rahik Sikder", True, (255, 255, 255))
+        game_screen.blit(title, (50, 50))
+        game_screen.blit(subtitle, (50, 120))
+
+
+        blackjack.draw_players()
+
         # Add in code to be run during each update cycle.
         # screen provides the PyGame Surface for the game window.
         # time provides the seconds elapsed since the last update.
