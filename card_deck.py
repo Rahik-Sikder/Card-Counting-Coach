@@ -118,3 +118,6 @@ class Shoe:
 
     def take_card(self):
         return self.cards.pop(0)
+    
+    def length(self):
+        return len(self.cards)
